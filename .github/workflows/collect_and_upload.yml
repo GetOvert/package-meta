@@ -23,3 +23,6 @@ jobs:
       run: brew update
     - name: Collect metadata for brew packages
       run: ruby scripts/brew/main.rb homebrew
+      env:
+        GOOGLE_CLOUD_PROJECT: getovert
+        GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
