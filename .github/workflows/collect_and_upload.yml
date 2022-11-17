@@ -1,0 +1,25 @@
+name: Collect and Upload Package Metadata
+
+on:
+  schedule:
+    - cron: '0 8 * * SUN'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-12
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Update Homebrew
+      run: brew update
+    - name: Collect metadata for brew packages
+      run: ruby scripts/brew/main.rb homebrew
