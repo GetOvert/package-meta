@@ -1,0 +1,18 @@
+# Official taps
+- name: homebrew/core
+- name: homebrew/cask
+  ignore:
+    - mactex
+  restrict:
+    - copyright: Microsoft
+      hide: [icon]
+      reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
+- name: homebrew/cask-versions
+
+# Unofficial taps
+- name: artginzburg/tap
+- name: gcenx/wine
+- name: getovert/tap
+- name: luckyframework/lucky
+- name: mongodb/brew
+- name: thatsjustcheesy/tap
