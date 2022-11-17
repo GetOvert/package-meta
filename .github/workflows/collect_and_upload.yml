@@ -2,7 +2,7 @@ name: Collect and Upload Package Metadata
 
 on:
   schedule:
-    - cron: '0 8 * * SUN'
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 permissions:
