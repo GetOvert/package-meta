@@ -1,16 +1,19 @@
 # Official taps
 - name: homebrew/core
 - name: homebrew/cask
-  ignore:
-    - mactex
-  restrict:
-    - copyright: Microsoft
-      hide: [icon]
+  skip_download:
+    - name: 'mactex'
+      reason: Server is slow and the package is huge
+  skip_icon_harvest:
+    - copyright: 'Microsoft'
       reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
 - name: homebrew/cask-versions
 
 # Unofficial taps
 - name: adoptopenjdk/openjdk
+  skip_download:
+    - name: ''
+      reason: No .apps
 - name: artginzburg/tap
 - name: aws/aws
 - name: aws/tap
@@ -30,6 +33,9 @@
 - name: homebrew-ffmpeg/ffmpeg
 - name: instantclienttap/instantclient
 - name: isen-ng/dotnet-sdk-versions
+  skip_download:
+    - name: ''
+      reason: No .apps
 - name: justinmayer/tap
 - name: knazarov/qemu-virgl
 - name: kong/kong

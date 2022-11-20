@@ -14,6 +14,10 @@ class Cask
     @name = name
   end
 
+  def to_s
+    @name
+  end
+
   def info
     @info ||= JSON.parse(`brew info --json=v2 --cask #{@name.shellescape}`)&.dig('casks', 0)
   end
@@ -27,7 +31,7 @@ class Cask
   end
 
   def tap
-    Tap.new(info['tap'])
+    @tap ||= Tap.new(info['tap'])
   end
 
   def with_installed
@@ -47,6 +51,10 @@ class Cask
       `brew uninstall #{@name.shellescape}`
       `HOMEBREW_CLEANUP_MAX_AGE_DAYS=0 brew cleanup #{@name.shellescape}`
     end
+  end
+
+  def copyright_holder
+    @copyright_holder ||= apps.filter_map(&:copyright_holder).join("; ")
   end
 
   def apps

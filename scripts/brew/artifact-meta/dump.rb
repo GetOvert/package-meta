@@ -8,10 +8,12 @@ require "json"
 require "pathname"
 require "shellwords"
 
-def dump_artifact_meta(tap)
+def dump_artifact_meta(tap_config)
+  tap = tap_config.tap
+
   repo = `brew --repo #{tap.name}`.chomp
   unless File.directory? "#{repo}/.git"
-    $stderr.puts "Skipped #{tap.name} at #{repo}"
+    $stderr.puts "Skipped #{tap} at #{repo}"
     return
   end
 
@@ -25,23 +27,42 @@ def dump_artifact_meta(tap)
     cask_names = if last_commit
       `#{__dir__}/changed_since_commit.sh #{repo} #{last_commit}`
         .lines(chomp: true)
+        .map do |short_name|
+          # To match the output of `tap.cask_names` (`brew casks`), only prepend
+          # tap name for non-official taps
+          # This allows consistent filtering on these generated names
+          # for skip_{download,icon_harvest}
+          tap.official? ? short_name : "#{tap.name}/#{short_name}"
+        end
     else
       tap.cask_names
       # For installed only:
       # `brew list --cask --full-name`.lines(chomp: true)
     end
+
     casks = cask_names.map { |name| Cask.new(name) }
+
+    casks.filter! do |cask|
+      should_download = tap_config.should_download?(cask)
+      $stderr.puts "Skipping download for #{cask}" unless should_download
+      should_download
+    end
 
     meta_by_name = Hash[
       casks.filter_map do |cask|
         meta = {}
 
         cask.with_installed do
-          upload_cask_icon(cask)
-          meta['copyright'] = cask_copyright_holders(cask)
+          if tap_config.should_harvest_icon?(cask)
+            upload_cask_icon(cask)
+          else
+            $stderr.puts "Skipping icon harvest for #{cask} (copyright: #{cask.copyright_holder})"
+          end
+
+          meta['copyright'] = cask.copyright_holder
         end
 
-        [cask.name, meta]
+        [cask.qualified_name, meta]
       end
     ]
 
@@ -83,12 +104,8 @@ def upload_app_icon(app, as:)
   true
 end
 
-def cask_copyright_holders(cask)
-  cask.apps.filter_map { |app| app.copyright_holder }.join("; ")
-end
-
 if $0 == __FILE__
   abort "Usage: #{$0} <tap-name>" unless ARGV.length == 1
 
-  dump_artifact_meta Tap.new(*ARGV)
+  dump_artifact_meta TapConfig.new(Tap.new(*ARGV))
 end
