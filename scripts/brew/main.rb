@@ -20,7 +20,9 @@ tap_configs = tap_items.map do |item|
 end
 taps = tap_configs.map &:tap
 
-taps.each &:install
+Parallel.each taps, in_threads: MAX_PARALLEL do |tap|
+  tap.install
+end
 Parallel.each taps, in_threads: MAX_PARALLEL do |tap|
   $stderr.puts "Dumping update times for #{tap}"
   dump_update_times tap
