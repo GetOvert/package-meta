@@ -28,6 +28,9 @@
 - name: gcenx/wine
 - name: getovert/tap
 - name: graalvm/tap
+  skip_download:
+    - name: ''
+      reason: No .apps
 - name: hakky54/crip
 - name: hashicorp/tap
 - name: homebrew-ffmpeg/ffmpeg
