@@ -15,8 +15,10 @@ taps = tap_items.map { |item| Tap.new(item['name']) }
 
 taps.each &:install
 Parallel.each taps, in_threads: MAX_PARALLEL do |tap|
+  $stderr.puts "Dumping update times for #{tap}"
   dump_update_times tap
 end
 taps.each do |tap|
+  $stderr.puts "Dumping artifact meta for #{tap}"
   dump_artifact_meta tap
 end

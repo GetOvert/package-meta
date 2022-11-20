@@ -34,14 +34,16 @@ class Cask
     # DISABLE THIS TO RUN LOCALLY
     # Change it to just `yield`
 
+    $stderr.puts "Installing #{@name}"
     `brew install #{@name.shellescape}`
     begin
       if $?.success?
         yield
       else
-        $stderr.puts "Failed to install #{@name.shellescape}"
+        $stderr.puts "Failed to install #{@name}"
       end
     ensure
+      $stderr.puts "Removing #{@name}"
       `brew uninstall #{@name.shellescape}`
       `HOMEBREW_CLEANUP_MAX_AGE_DAYS=0 brew cleanup #{@name.shellescape}`
     end
