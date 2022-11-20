@@ -40,7 +40,7 @@ def dump_artifact_meta(tap_config)
       # `brew list --cask --full-name`.lines(chomp: true)
     end
 
-    casks = cask_names.map { |name| Cask.new(name) }
+    casks = cask_names.uniq.map { |name| Cask.new(name) }
 
     casks.filter! do |cask|
       should_download = tap_config.should_download?(cask)
