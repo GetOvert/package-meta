@@ -10,7 +10,7 @@
 - name: homebrew/cask-versions
 
 # Unofficial taps
-- name: AdoptOpenJDK/openjdk
+- name: adoptopenjdk/openjdk
 - name: artginzburg/tap
 - name: aws/aws
 - name: aws/tap
@@ -26,22 +26,22 @@
 - name: gcenx/wine
 - name: getovert/tap
 - name: graalvm/tap
-- name: Hakky54/certificate-ripper
+- name: hakky54/crip
 - name: hashicorp/tap
 - name: homebrew-ffmpeg/ffmpeg
-- name: InstantClientTap/instantclient
+- name: instantclienttap/instantclient
 - name: isen-ng/dotnet-sdk-versions
 - name: justinmayer/tap
 - name: knazarov/qemu-virgl
-- name: Kong/kong
+- name: kong/kong
 - name: luckyframework/lucky
 - name: mongodb/brew
 - name: mtslzr/marmaduke-chromium
 - name: nativeos/i386-elf-toolchain
-- name: OSGeo/osgeo4mac
+- name: osgeo/osgeo4mac
 - name: osrf/simulation
 - name: pothosware/pothos
-- name: Proxmark/proxmark3
+- name: proxmark/proxmark3
 - name: sashkab/python
 - name: shivammathur/extensions
 - name: shivammathur/php
