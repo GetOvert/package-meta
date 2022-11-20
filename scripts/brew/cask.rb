@@ -40,12 +40,10 @@ class Cask
 
     $stderr.puts "Installing #{@name}"
     `brew install --cask --skip-cask-deps #{@name.shellescape}`
+    return $stderr.puts "Failed to install #{@name}" unless $?.success?
+
     begin
-      if $?.success?
-        yield
-      else
-        $stderr.puts "Failed to install #{@name}"
-      end
+      yield
     ensure
       $stderr.puts "Removing #{@name}"
       `brew uninstall --cask #{@name.shellescape}`
