@@ -60,7 +60,7 @@ class Cask
       if app_file_names = artifact['app']
 
         Array(app_file_names).map do |app_file_name|
-          File.join('/Applications', app_file_name)
+          File.join('/Applications', Dir.basename(app_file_name))
         end
 
       elsif uninstall_items = artifact['uninstall']
