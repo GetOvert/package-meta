@@ -69,16 +69,16 @@ GEM
     webrick (1.7.0)
 
 PLATFORMS
-  arm64-darwin-21
   arm64-darwin-20
-  x86_64-darwin-21
-  x86_64-darwin-20
+  arm64-darwin-21
   x86_64-darwin-19
+  x86_64-darwin-20
+  x86_64-darwin-21
 
 DEPENDENCIES
-  dotenv
-  google-cloud-storage
-  parallel
+  dotenv (~> 2.8, >= 2.8.1)
+  google-cloud-storage (~> 1.44)
+  parallel (~> 1.22)
 
 BUNDLED WITH
    2.3.11

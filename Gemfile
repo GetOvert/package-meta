@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "dotenv"
-gem "google-cloud-storage"
-gem "parallel"
+gem 'dotenv', '~> 2.8', '>= 2.8.1'
+gem 'google-cloud-storage', '~> 1.44'
+gem 'parallel', '~> 1.22'
