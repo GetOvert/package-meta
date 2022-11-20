@@ -34,6 +34,10 @@ class Cask
     # DISABLE THIS TO RUN LOCALLY
     # Change it to just `yield`
 
+    # HACK: Bypass Homebrew's `sudo` detection
+    # https://github.com/Homebrew/brew/blob/759ab2d0bdc6b0d1f810d6e9351c834d027809f7/Library/Homebrew/brew.sh#L199-L201
+    FileUtils.touch '/.dockerenv'
+
     `sudo brew install #{@name.shellescape}`
     begin
       if $?.success?
