@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$#" -ne 0 ]
+if [ "$#" -ne 1 ]
 then
   cat <<END >/dev/stderr
 Usage: all.sh <repo>
