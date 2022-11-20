@@ -63,6 +63,8 @@ def dump_artifact_meta(tap_config)
         end
 
         [cask.qualified_name, meta]
+      rescue => e
+        $stderr.puts "Error dumping artifact meta for #{cask}: #{e}"
       end
     ]
 
