@@ -2,7 +2,7 @@
 
 if [ "$#" -ne 0 ]
 then
-  cat <<END
+  cat <<END >/dev/stderr
 Usage: all.sh <repo>
 
 <repo>: Path to Git repository

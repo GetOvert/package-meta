@@ -1,19 +1,22 @@
-require_relative "../env.rb"
-require "google/cloud/storage"
+require "shellwords"
 
 class Tap
-  BUCKET = Google::Cloud::Storage.new.bucket 'storage.getovert.app'
-
   attr_reader :name
 
   def official?; @official; end
 
   def initialize(name)
-    @name = name
-    @official = JSON.parse(`brew tap-info --json=v1 #{@name}`)[0]['official']
+    @name = name.sub(%r`/homebrew-`, '')
+    @official = JSON.parse(`brew tap-info --json=v1 #{@name.shellescape}`)[0]['official']
   end
 
   def install
-    `brew tap #{@name}`
+    `brew tap #{@name.shellescape}`
+  end
+
+  def cask_names
+    @cask_names ||= `brew casks`
+      .each_line(chomp: true)
+      .select { |line| line.start_with?(@name) }
   end
 end

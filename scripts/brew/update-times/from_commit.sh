@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ "$#" -ne 1 ]
+if [ "$#" -ne 2 ]
 then
-  cat <<END
+  cat <<END >/dev/stderr
 Usage: from_commit.sh <repo> <commit>
 
 <repo>: Path to Git repository
@@ -16,7 +16,7 @@ from_commit="$2"
 
 cd "$repo"
 
-git log --reverse --pretty='%H' "$from_commit..$(git symbolic-ref HEAD)" | tail -n +1 | while read -r commit
+git log --reverse --pretty='%H' "$from_commit..HEAD" | tail -n +1 | while read -r commit
 do
   authored_time="$(git log -n 1 --pretty='%at' "$commit")"
 
