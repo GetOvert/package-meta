@@ -34,11 +34,7 @@ class Cask
     # DISABLE THIS TO RUN LOCALLY
     # Change it to just `yield`
 
-    # HACK: Bypass Homebrew's `sudo` detection
-    # https://github.com/Homebrew/brew/blob/759ab2d0bdc6b0d1f810d6e9351c834d027809f7/Library/Homebrew/brew.sh#L199-L201
-    FileUtils.touch '/.dockerenv'
-
-    `sudo brew install #{@name.shellescape}`
+    `brew install #{@name.shellescape}`
     begin
       if $?.success?
         yield
@@ -46,7 +42,7 @@ class Cask
         $stderr.puts "Failed to install #{@name.shellescape}"
       end
     ensure
-      `sudo brew uninstall #{@name.shellescape}`
+      `brew uninstall #{@name.shellescape}`
       `HOMEBREW_CLEANUP_MAX_AGE_DAYS=0 brew cleanup #{@name.shellescape}`
     end
   end
