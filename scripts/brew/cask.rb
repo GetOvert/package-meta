@@ -39,7 +39,7 @@ class Cask
     # Change it to just `yield`
 
     $stderr.puts "Installing #{@name}"
-    `brew install #{@name.shellescape}`
+    `brew install --cask --skip-cask-deps #{@name.shellescape}`
     begin
       if $?.success?
         yield
@@ -48,7 +48,7 @@ class Cask
       end
     ensure
       $stderr.puts "Removing #{@name}"
-      `brew uninstall #{@name.shellescape}`
+      `brew uninstall --cask #{@name.shellescape}`
       `HOMEBREW_CLEANUP_MAX_AGE_DAYS=0 brew cleanup #{@name.shellescape}`
     end
   end
