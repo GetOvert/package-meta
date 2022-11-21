@@ -39,7 +39,7 @@ class Cask
     # Change it to just `yield`
 
     $stderr.puts "Installing #{@name}"
-    `brew install --cask --skip-cask-deps #{@name.shellescape}`
+    `brew install --cask --skip-cask-deps --quiet #{@name.shellescape}`
     return $stderr.puts "Failed to install #{@name}" unless $?.success?
 
     begin
