@@ -128,7 +128,7 @@ class App
       # Remove years
       /\d{4}\s?[-–—]?\s?/i,
       # Remove irrelevant punctuation
-      /(?<!co|corp|et al|lda|ltd|inc)\./i,
+      /(?<!co|corp|et al|lda|ltd|inc)\.(?!com)/i,
       /[,]/i,
       # Remove additional statements observed in the wild
       /\w+ rights reserved/i,
