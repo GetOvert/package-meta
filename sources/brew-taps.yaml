@@ -2,6 +2,8 @@
 - name: homebrew/core
 - name: homebrew/cask
   skip_download:
+    - name: 'cernbox'
+      reason: Takes forever
     - name: 'mactex'
       reason: Server is slow and the package is huge
   skip_icon_harvest:
