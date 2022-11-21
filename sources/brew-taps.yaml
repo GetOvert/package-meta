@@ -2,6 +2,8 @@
 - name: homebrew/core
 - name: homebrew/cask
   skip_download:
+    - name: 'anaconda'
+      reason: It's huge
     - name: 'cernbox'
       reason: Takes forever
     - name: 'mactex'
