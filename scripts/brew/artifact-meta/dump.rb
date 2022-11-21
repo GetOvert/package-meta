@@ -52,7 +52,7 @@ def dump_artifact_meta(tap_config)
       casks.each_with_index.filter_map do |cask, index|
         meta = {}
 
-        $stderr.puts "\n(#{index}/#{casks.count}) #{cask}"
+        $stderr.puts "\n(#{index + 1}/#{casks.count}) #{cask}"
 
         cask.with_installed do
           if tap_config.should_harvest_icon?(cask)
