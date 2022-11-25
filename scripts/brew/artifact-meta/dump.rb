@@ -64,7 +64,7 @@ def dump_artifact_meta(tap_config)
           meta['copyright'] = cask.copyright_holder
         end
 
-        [cask.qualified_name, meta]
+        [cask.info.full_name, meta]
       rescue => e
         $stderr.puts "Error dumping artifact meta for #{cask}: #{e}"
       end
