@@ -131,8 +131,9 @@ class App
       /(?<!co|corp|et al|lda|ltd|inc)\.(?!com)/i,
       /[,]/i,
       # Remove additional statements observed in the wild
-      /\w+ rights reserved/i,
-      /(licensed|released) under( \S+)* \S+/i,
+      /\w+ rights reserved\b/i,
+      /\b(licensed|released) under( \S+)* \S+/i,
+      /\b[AL]GPL\s*v?\d?\s*\+?\b/i,
     ].each do |r|
       copyright.gsub!(r, '')
     end
