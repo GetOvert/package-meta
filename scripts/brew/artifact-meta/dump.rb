@@ -8,7 +8,7 @@ require "json"
 require "pathname"
 require "shellwords"
 
-BATCH_SIZE = 16
+BATCH_SIZE = 8
 
 def dump_artifact_meta(tap_config)
   tap = tap_config.tap
@@ -56,7 +56,6 @@ def dump_artifact_meta(tap_config)
 
       $stderr.puts "\n(#{indices.first + 1}–#{indices.last + 1}/#{casks.count}) #{casks.join(', ')}"
 
-      meta = {}
       Cask.with_all_installed(casks) do
         casks.each do |cask|
           if tap_config.should_harvest_icon?(cask)
@@ -65,12 +64,13 @@ def dump_artifact_meta(tap_config)
             $stderr.puts "Skipping icon harvest for #{cask} (publisher: #{cask.publisher})"
           end
 
-          meta['copyright'] = cask.copyright
-          meta['publisher'] = cask.publisher
+          meta_by_name[cask.info.full_name] = {
+            'copyright': cask.copyright,
+            'publisher': cask.publisher
+          }
         end
       end
 
-      meta_by_name[cask.info.full_name] = meta
     rescue => e
       $stderr.puts "Error dumping artifact meta for #{casks.join(', ')}: #{e}"
     end
