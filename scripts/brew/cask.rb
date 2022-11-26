@@ -161,6 +161,7 @@ class App
       /\w+ rights reserved\b/i,
       /\b(licensed|released) under( \S+)* \S+/i,
       /\b[AL]GPL\s*v?\d?\s*\+?\b/i,
+      /PLACEHOLDER FOR LOCALIZATION/i,
     ].each do |r|
       publisher.gsub!(r, '')
     end
