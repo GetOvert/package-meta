@@ -51,6 +51,25 @@ class Cask
     end
   end
 
+  def self.with_all_installed(casks)
+    # DISABLE THIS TO RUN LOCALLY
+    # Change it to just `yield`
+
+    cask_args = casks.map(&:name).map(&:shellescape).join(' ')
+
+    $stderr.puts "Installing #{cask_args}"
+    `brew install --cask --quiet #{cask_args}`
+    return $stderr.puts "Failed to install #{cask_args}" unless $?.success?
+
+    begin
+      yield
+    ensure
+      $stderr.puts "Removing #{cask_args}"
+      `brew uninstall --cask #{cask_args}`
+      `HOMEBREW_CLEANUP_MAX_AGE_DAYS=0 brew cleanup #{cask_args}`
+    end
+  end
+
   def copyright_holder
     @copyright_holder ||= apps.filter_map(&:copyright_holder).join("; ")
   end

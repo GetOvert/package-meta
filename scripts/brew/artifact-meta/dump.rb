@@ -8,6 +8,8 @@ require "json"
 require "pathname"
 require "shellwords"
 
+BATCH_SIZE = 16
+
 def dump_artifact_meta(tap_config)
   tap = tap_config.tap
 
@@ -49,19 +51,23 @@ def dump_artifact_meta(tap_config)
     end
 
     meta_by_name = Hash[
-      casks.each_with_index.filter_map do |cask, index|
+      casks.each_with_index.each_slice(BATCH_SIZE).filter_map do |batch|
+        casks, indices = batch.transpose
+
+
+        $stderr.puts "\n(#{indices.first + 1}–#{indices.last + 1}/#{casks.count}) #{casks.join(', ')}"
+
         meta = {}
+        Cask.with_all_installed(casks) do
+          casks.each do |cask|
+            if tap_config.should_harvest_icon?(cask)
+              upload_cask_icon(cask)
+            else
+              $stderr.puts "Skipping icon harvest for #{cask} (copyright: #{cask.copyright_holder})"
+            end
 
-        $stderr.puts "\n(#{index + 1}/#{casks.count}) #{cask}"
-
-        cask.with_installed do
-          if tap_config.should_harvest_icon?(cask)
-            upload_cask_icon(cask)
-          else
-            $stderr.puts "Skipping icon harvest for #{cask} (copyright: #{cask.copyright_holder})"
+            meta['copyright'] = cask.copyright_holder
           end
-
-          meta['copyright'] = cask.copyright_holder
         end
 
         [cask.info.full_name, meta]
