@@ -54,7 +54,7 @@ def dump_artifact_meta(tap_config)
     all_casks.each_with_index.each_slice(BATCH_SIZE) do |batch|
       casks, indices = batch.transpose
 
-      $stderr.puts "\n(#{indices.first + 1}–#{indices.last + 1}/#{casks.count}) #{casks.join(', ')}"
+      $stderr.puts "\n(#{indices.first + 1}–#{indices.last + 1}/#{all_casks.count}) #{casks.join(', ')}"
 
       Cask.with_all_installed(casks) do
         casks.each do |cask|
@@ -64,7 +64,7 @@ def dump_artifact_meta(tap_config)
             $stderr.puts "Skipping icon harvest for #{cask} (publisher: #{cask.publisher})"
           end
 
-          meta_by_name[cask.info.full_name] = {
+          meta_by_name[cask.info['full_token']] = {
             'copyright': cask.copyright,
             'publisher': cask.publisher
           }
