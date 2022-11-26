@@ -70,8 +70,12 @@ class Cask
     end
   end
 
-  def copyright_holder
-    @copyright_holder ||= apps.filter_map(&:copyright_holder).join("; ")
+  def copyright
+    @copyright ||= apps.filter_map(&:copyright).join("; ")
+  end
+
+  def publisher
+    @publisher ||= apps.filter_map(&:publisher).join("; ")
   end
 
   def apps
@@ -135,10 +139,14 @@ class App
     icns_path if File.file? icns_path
   end
 
-  def copyright_holder
-    return unless info and copyright = info['NSHumanReadableCopyright']
+  def copyright
+    info['NSHumanReadableCopyright'] if info
+  end
 
-    copyright.gsub!(/\r?\n/, ' ')
+  def publisher
+    return unless publisher = copyright
+
+    publisher.gsub!(/\r?\n/, ' ')
     [
       # Collapse whitespace
       /\s+(?=\s)/i,
@@ -154,11 +162,11 @@ class App
       /\b(licensed|released) under( \S+)* \S+/i,
       /\b[AL]GPL\s*v?\d?\s*\+?\b/i,
     ].each do |r|
-      copyright.gsub!(r, '')
+      publisher.gsub!(r, '')
     end
-    copyright.strip!
-    return if copyright.empty?
+    publisher.strip!
+    return if publisher.empty?
 
-    copyright
+    publisher
   end
 end

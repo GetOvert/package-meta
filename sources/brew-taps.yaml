@@ -10,7 +10,7 @@
       reason: Server is slow and the package is huge
   skip_icon_harvest:
     - name: 'microsoft'
-      copyright: 'Microsoft'
+      publisher: 'Microsoft'
       reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
 - name: homebrew/cask-versions
 

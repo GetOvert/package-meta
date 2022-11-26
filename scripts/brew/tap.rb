@@ -57,12 +57,12 @@ class TapConfigSkipIconHarvest
   def initialize(config)
     config ||= []
     @name_patterns = config.filter_map { |item| Regexp.new(item['name']) if item['name'] }
-    @copyright_patterns = config.filter_map { |item| Regexp.new(item['copyright']) if item['copyright'] }
+    @publisher_patterns = config.filter_map { |item| Regexp.new(item['publisher']) if item['publisher'] }
   end
 
   def should_harvest_icon?(cask)
     none_match?(@name_patterns, cask.name) &&
-      none_match(@copyright_patterns, cask.copyright_holder)
+      none_match(@publisher_patterns, cask.publisher)
   end
 end
 
