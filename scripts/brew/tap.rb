@@ -62,7 +62,7 @@ class TapConfigSkipIconHarvest
 
   def should_harvest_icon?(cask)
     none_match?(@name_patterns, cask.name) &&
-      none_match(@publisher_patterns, cask.publisher)
+    none_match?(@publisher_patterns, cask.publisher)
   end
 end
 
