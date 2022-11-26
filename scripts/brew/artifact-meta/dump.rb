@@ -42,16 +42,16 @@ def dump_artifact_meta(tap_config)
       # `brew list --cask --full-name`.lines(chomp: true)
     end
 
-    casks = cask_names.uniq.map { |name| Cask.new(name) }
+    all_casks = cask_names.uniq.map { |name| Cask.new(name) }
 
-    casks.filter! do |cask|
+    all_casks.filter! do |cask|
       should_download = tap_config.should_download?(cask)
       $stderr.puts "Skipping download for #{cask}" unless should_download
       should_download
     end
 
     meta_by_name = {}
-    casks.each_with_index.each_slice(BATCH_SIZE) do |batch|
+    all_casks.each_with_index.each_slice(BATCH_SIZE) do |batch|
       casks, indices = batch.transpose
 
       $stderr.puts "\n(#{indices.first + 1}–#{indices.last + 1}/#{casks.count}) #{casks.join(', ')}"
