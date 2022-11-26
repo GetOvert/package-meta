@@ -9,7 +9,8 @@
     - name: 'mactex'
       reason: Server is slow and the package is huge
   skip_icon_harvest:
-    - copyright: 'Microsoft'
+    - name: 'microsoft'
+      copyright: 'Microsoft'
       reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
 - name: homebrew/cask-versions
 

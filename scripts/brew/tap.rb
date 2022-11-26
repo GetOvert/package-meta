@@ -45,22 +45,24 @@ end
 class TapConfigSkipDownload
   def initialize(config)
     config ||= []
-    @name_patterns = config.map { |item| Regexp.new(item['name']) }
+    @name_patterns = config.filter_map { |item| Regexp.new(item['name']) if item['name'] }
   end
 
   def should_download?(cask)
-    none_match? @name_patterns, cask.name
+    none_match?(@name_patterns, cask.name)
   end
 end
 
 class TapConfigSkipIconHarvest
   def initialize(config)
     config ||= []
-    @copyright_patterns = config.map { |item| Regexp.new(item['copyright']) }
+    @name_patterns = config.filter_map { |item| Regexp.new(item['name']) if item['name'] }
+    @copyright_patterns = config.filter_map { |item| Regexp.new(item['copyright']) if item['copyright'] }
   end
 
   def should_harvest_icon?(cask)
-    none_match? @copyright_patterns, cask.copyright_holder
+    none_match?(@name_patterns, cask.name) &&
+      none_match(@copyright_patterns, cask.copyright_holder)
   end
 end
 
