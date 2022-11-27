@@ -66,7 +66,8 @@ def dump_artifact_meta(tap_config)
 
           meta_by_name[cask.info['full_token']] = {
             'copyright': cask.copyright,
-            'publisher': cask.publisher
+            'publisher': cask.publisher,
+            'category': cask.category
           }
         end
       end

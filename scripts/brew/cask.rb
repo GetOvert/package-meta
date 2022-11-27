@@ -170,4 +170,8 @@ class App
 
     publisher
   end
+
+  def category
+    info['LSApplicationCategoryType'] if info
+  end
 end
