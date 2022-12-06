@@ -78,6 +78,10 @@ class Cask
     @publisher ||= apps.filter_map(&:publisher).join("; ")
   end
 
+  def category
+    @category ||= apps.filter_map(&:category).find { |category| category }
+  end
+
   def apps
     info['artifacts'].flat_map do |artifact|
       if app_file_names = artifact['app']
