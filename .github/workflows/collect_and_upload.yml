@@ -13,16 +13,22 @@ jobs:
     runs-on: macos-12
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Update Homebrew
-      run: brew update
-    - name: Collect metadata for brew packages
-      run: bundle exec ruby scripts/brew/main.rb sources/brew-taps.yaml
-      env:
-        GOOGLE_CLOUD_PROJECT: getovert
-        GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Disable Homebrew analytics to avoid inflating install counts
+        run: brew analytics off
+
+      - name: Update Homebrew
+        run: brew update
+
+      - name: Collect metadata for brew packages
+        run: bundle exec ruby scripts/brew/main.rb sources/brew-taps.yaml
+        env:
+          GOOGLE_CLOUD_PROJECT: getovert
+          GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
