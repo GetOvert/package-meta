@@ -19,8 +19,8 @@ class App
     @name
   end
 
-  def info
-    @info ||= begin
+  def manifest
+    @manifest ||= begin
       File.open(File.join(Dir.home, 'scoop', 'buckets', @bucket_name, 'bucket', "#{@name}.json")) do |io|
         JSON.load io
       end
@@ -89,31 +89,23 @@ class App
   end
 
   def executables
-    Array(info['bin']).map { |executable_name| Executable.new(@name, executable_name) }
-  end
-
-  private def app_paths_for_pkg_identifier(pkg_identifier)
-    begin
-      receipt_info = JSON.parse `pkgutil --pkg-info-plist #{pkg_identifier.shellescape} | plutil -convert json -o - -`
-    rescue
-      # No receipt? No problem
-      return []
-    end
-    installation_base_path = File.join receipt_info['volume'], receipt_info['install-location']
-
-    `pkgutil --only-dirs --files #{pkg_identifier.shellescape}`
-      .lines(chomp: true)
-      .filter { |subpath| subpath =~ /^[^\/]+\.app$/ }
-      .map { |app_subpath| File.join(installation_base_path, app_subpath) }
+    Array(manifest['bin'])
+      .flatten
+      .map { |executable_name| Executable.new(@name, executable_name) }
+      .filter(&:exists?)
   end
 end
 
 class Executable
-  attr_reader :app_name, :executable_file_name
+  attr_reader :app_name, :app_executable_name
 
   def initialize(app_name, app_executable_name)
     @app_name = app_name
     @app_executable_name = app_executable_name
+  end
+
+  def exists?
+    File.exist?(File.join(Dir.home, 'scoop', 'apps', @app_name, 'current', @app_executable_name))
   end
 
   def official_name
