@@ -66,7 +66,7 @@ def dump_artifact_meta(bucket_config)
       end
 
     rescue => e
-      $stderr.puts "Error dumping artifact meta for #{apps.join(', ')}: #{e}"
+      $stderr.puts "Error dumping artifact meta for #{apps.join(', ')}: #{e.full_message}"
     end
 
     {
