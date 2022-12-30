@@ -46,9 +46,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Install scoop
-        run: |
-          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-          irm get.scoop.sh | iex
+        uses: GetOvert/setup-scoop@main
 
       - name: Collect metadata for scoop packages
         run: bundle exec ruby scripts/scoop/main.rb sources/scoop-buckets.yaml
