@@ -20,7 +20,7 @@ function index {
   do
     [ -f "$file" ] || continue
 
-    echo "$(basename $file .json)\t$(git log -n 1 --pretty='%at' -- $file)"
+    echo -e "$(basename $file .json)\t$(git log -n 1 --pretty='%at' -- $file)"
   done
 }
 
