@@ -24,7 +24,7 @@ do
   do
     case "$file_changed" in
     bucket/*.json)
-      echo "$(basename $file_changed .json)\t$authored_time"
+      echo -e "$(basename $file_changed .json)\t$authored_time"
       ;;
     esac
   done

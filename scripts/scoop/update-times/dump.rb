@@ -28,10 +28,6 @@ def dump_update_times(bucket)
     new_update_times_by_name = Hash[
       tsv.lines(chomp: true).map do |line|
         name, time = line.split "\t"
-
-        # Prepend bucket name
-        name = "#{bucket.name}/#{name}"
-
         [name, time.to_i]
       end
     ]
