@@ -3,7 +3,7 @@ Param (
   $AppExecutableName
 )
 
-mkdir "$HOME\extracted-icons"
+mkdir "$HOME\extracted-icons" -Force | Out-Null
 
 # https://github.com/GetOvert/windows-file-icon-extractor
 & $PSScriptRoot\FileIconExtractor.exe `
