@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "../cloud_storage.rb"
+require_relative "../../cloud_storage.rb"
 require_relative "../bucket.rb"
 require_relative "../app.rb"
 require "fileutils"

@@ -1,4 +1,4 @@
-require_relative "../env.rb"
+require_relative "./env.rb"
 require "google/cloud/storage"
 
 module CloudStorage
