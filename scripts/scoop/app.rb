@@ -1,4 +1,4 @@
-require_relative "./tap.rb"
+require_relative "./bucket.rb"
 require "json"
 require "shellwords"
 
