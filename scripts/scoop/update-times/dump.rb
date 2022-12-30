@@ -25,26 +25,21 @@ def dump_update_times(bucket)
       `sh #{__dir__}/all.sh #{repo.shellescape}`
     end
 
-    new_update_times_by_name =
-      tsv.lines(chomp: true)
-        .group_by { |line| line.split("\t", 2)[0] }
-        .transform_values do |lines|
-          Hash[
-            lines.map do |line|
-              name, time = line.split "\t"
+    new_update_times_by_name = Hash[
+      tsv.lines(chomp: true).map do |line|
+        name, time = line.split "\t"
 
-              # Prepend bucket name
-              name = "#{bucket.name}/#{name}"
+        # Prepend bucket name
+        name = "#{bucket.name}/#{name}"
 
-              [name, time.to_i]
-            end
-          ]
-        end
+        [name, time.to_i]
+      end
+    ]
 
     {
       'app': {
         **(state['by_name']&.[]('app') || {}),
-        **(new_update_times_by_name['app'] || {}),
+        **(new_update_times_by_name || {}),
       }
     }
   end
