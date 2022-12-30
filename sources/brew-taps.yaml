@@ -13,6 +13,9 @@
       publisher: 'Microsoft'
       reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
 - name: homebrew/cask-versions
+    - name: 'microsoft'
+      publisher: 'Microsoft'
+      reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
 
 # Unofficial taps
 - name: adoptopenjdk/openjdk
