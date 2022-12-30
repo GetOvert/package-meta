@@ -7,6 +7,9 @@
       reason: Main contains only command-line developer tools
 - name: extras
   url: https://github.com/ScoopInstaller/Extras
+  skip_download:
+    - name: '^calibre$'
+      reason: Appears to hang forever
   skip_icon_harvest:
     - name: 'microsoft'
       publisher: 'Microsoft'
