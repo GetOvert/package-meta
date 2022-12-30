@@ -18,7 +18,7 @@ bucket_configs = bucket_items.map do |item|
     skip_icon_harvest: BucketConfigSkipIconHarvest.new(item['skip_icon_harvest'])
   )
 end
-buckets = bucket_config.map &:bucket
+buckets = bucket_configs.map &:bucket
 
 Parallel.each buckets, in_threads: MAX_PARALLEL do |bucket|
   bucket.install
