@@ -1,0 +1,33 @@
+# Official buckets
+# https://github.com/ScoopInstaller/Scoop/blob/master/buckets.json
+- name: main
+  url: https://github.com/ScoopInstaller/Main
+- name: extras
+  url: https://github.com/ScoopInstaller/Extras
+  skip_icon_harvest:
+    - name: 'microsoft'
+      publisher: 'Microsoft'
+      reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
+- name: versions
+  url: https://github.com/ScoopInstaller/Versions
+  skip_icon_harvest:
+    - name: 'microsoft'
+      publisher: 'Microsoft'
+      reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
+- name: nirsoft
+  url: https://github.com/kodybrown/scoop-nirsoft
+- name: sysinternals
+  url: https://github.com/niheaven/scoop-sysinternals
+- name: php
+  url: https://github.com/ScoopInstaller/PHP
+- name: nerd-fonts
+  url: https://github.com/matthewjberger/scoop-nerd-fonts
+# - name: nonportable
+#   url: https://github.com/ScoopInstaller/Nonportable
+- name: java
+  url: https://github.com/ScoopInstaller/Java
+- name: games
+  url: https://github.com/Calinou/scoop-games
+
+# Unofficial buckets
+# TODO: Add popular ones from https://scoop.sh/#/buckets
