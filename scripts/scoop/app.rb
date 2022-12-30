@@ -21,14 +21,14 @@ class App
 
   def info
     @info ||= begin
-      File.open(File.join(Dir.home, 'scoop', 'buckets', @bucket, 'bucket', "#{@name}.json")) do |io|
+      File.open(File.join(Dir.home, 'scoop', 'buckets', @bucket_name, 'bucket', "#{@name}.json")) do |io|
         JSON.load io
       end
     end
   end
 
   def qualified_name
-    "#{@bucket}/#{@name}"
+    "#{@bucket_name}/#{@name}"
   end
 
   def bucket
