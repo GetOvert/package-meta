@@ -2,6 +2,9 @@
 # https://github.com/ScoopInstaller/Scoop/blob/master/buckets.json
 - name: main
   url: https://github.com/ScoopInstaller/Main
+  skip_icon_harvest:
+    - name: ''
+      reason: Main contains only command-line developer tools
 - name: extras
   url: https://github.com/ScoopInstaller/Extras
   skip_icon_harvest:
