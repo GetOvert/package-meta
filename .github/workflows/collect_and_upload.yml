@@ -45,8 +45,10 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      - name: Update scoop
-        run: scoop update
+      - name: Install scoop
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+          irm get.scoop.sh | iex
 
       - name: Collect metadata for scoop packages
         run: bundle exec ruby scripts/scoop/main.rb sources/scoop-buckets.yaml
