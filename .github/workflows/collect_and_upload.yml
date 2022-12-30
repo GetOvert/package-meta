@@ -32,3 +32,24 @@ jobs:
         env:
           GOOGLE_CLOUD_PROJECT: getovert
           GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+
+  scoop:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Update scoop
+        run: scoop update
+
+      - name: Collect metadata for scoop packages
+        run: bundle exec ruby scripts/scoop/main.rb sources/scoop-buckets.yaml
+        env:
+          GOOGLE_CLOUD_PROJECT: getovert
+          GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
