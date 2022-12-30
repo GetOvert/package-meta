@@ -164,23 +164,24 @@ class Executable
   # https://github.com/EddieRingle/portaudio/blob/master/src/hostapi/wasapi/mingw-include/propkey.h
   private def read_extended_property(property_key)
     value = %x{
-      powershell.exe #{__dir__}/read_extended_property.ps1 ^
-        -AppName #{@app_name} ^
-        -AppExecutableName #{@app_executable_name} ^
-        -ExtendedPropertyName #{property_key}
+      powershell.exe #{__dir__}/read_extended_property.ps1 -AppName #{@app_name} -AppExecutableName #{@app_executable_name} -ExtendedPropertyName #{property_key}
     }
-    return unless $?.success?
+    unless $?.success?
+      $stderr.print value
+      return
+    end
 
     value.chomp
   end
 
   def extract_icon
     path = %x{
-      powershell.exe #{__dir__}/extract_icon.ps1 ^
-        -AppName #{@app_name} ^
-        -AppExecutableName #{@app_executable_name} ^
+      powershell.exe #{__dir__}/extract_icon.ps1 -AppName #{@app_name} -AppExecutableName #{@app_executable_name}
     }
-    return unless $?.success?
+    unless $?.success?
+      $stderr.print path
+      return
+    end
 
     path.chomp
   end
