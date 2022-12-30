@@ -73,7 +73,7 @@ def dump_artifact_meta(tap_config)
       end
 
     rescue => e
-      $stderr.puts "Error dumping artifact meta for #{casks.join(', ')}: #{e}"
+      $stderr.puts "Error dumping artifact meta for #{casks.join(', ')}: #{e.full_message}"
     end
 
     {
