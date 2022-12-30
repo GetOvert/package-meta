@@ -72,6 +72,7 @@ PLATFORMS
   arm64-darwin-20
   arm64-darwin-21
   x64-mingw-ucrt
+  x64-mingw32
   x86_64-darwin-19
   x86_64-darwin-20
   x86_64-darwin-21
@@ -82,4 +83,4 @@ DEPENDENCIES
   parallel (~> 1.22)
 
 BUNDLED WITH
-   2.3.11
+   2.3.26
