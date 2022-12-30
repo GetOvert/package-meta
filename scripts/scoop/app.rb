@@ -144,6 +144,8 @@ class Executable
       /\b[AL]GPL\s*v?\d?\s*\+?\b/i,
       /\bPLACEHOLDER FOR LOCALIZATION\b/i,
       /\bThis software is\b/i,
+      /\b(Free|Share)ware\b/i,
+      /\bMIT licensed?\b/,
     ].each do |r|
       publisher.gsub!(r, '')
     end
