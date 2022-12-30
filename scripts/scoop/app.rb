@@ -69,23 +69,23 @@ class App
   end
 
   def official_name
-    @official_name ||= apps.filter_map(&:official_name).join("; ")
+    @official_name ||= executables.filter_map(&:official_name).join("; ")
   end
 
   def product_name
-    @product_name ||= apps.filter_map(&:product_name).join("; ")
+    @product_name ||= executables.filter_map(&:product_name).join("; ")
   end
 
   def copyright
-    @copyright ||= apps.filter_map(&:copyright).join("; ")
+    @copyright ||= executables.filter_map(&:copyright).join("; ")
   end
 
   def trademarks
-    @trademarks ||= apps.filter_map(&:trademarks).join("; ")
+    @trademarks ||= executables.filter_map(&:trademarks).join("; ")
   end
 
   def publisher
-    @publisher ||= apps.filter_map(&:publisher).join("; ")
+    @publisher ||= executables.filter_map(&:publisher).join("; ")
   end
 
   def executables
