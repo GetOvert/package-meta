@@ -12,6 +12,8 @@
       reason: Appears to hang forever
     - name: 'nunustudio'
       reason: Uninstaller appears to hang forever
+    - name: 'gpg4win'
+      reason: Appears to hang forever
   skip_icon_harvest:
     - name: 'microsoft'
       publisher: 'Microsoft'
