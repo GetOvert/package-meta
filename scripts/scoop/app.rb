@@ -141,7 +141,7 @@ class Executable
       # Remove additional statements observed in the wild
       /\w+ rights reserved\b/i,
       /\b(licensed|released) under( \S+)* \S+/i,
-      /\b[AL]GPL\s*v?\d?\s*\+?\b/i,
+      /\b[AL]?GPL\s*v?\d?\s*\+?\b/i,
       /\bPLACEHOLDER FOR LOCALIZATION\b/i,
       /\bThis software is\b/i,
       /\b(Free|Share)ware\b/i,
