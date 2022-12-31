@@ -10,12 +10,17 @@
   skip_download:
     - name: '^calibre$'
       reason: Appears to hang forever
+    - name: 'nunustudio'
+      reason: Uninstaller appears to hang forever
   skip_icon_harvest:
     - name: 'microsoft'
       publisher: 'Microsoft'
       reason: https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks
 - name: versions
   url: https://github.com/ScoopInstaller/Versions
+  skip_download:
+    - name: '^everything-\w+'
+      reason: Appears to hang forever
   skip_icon_harvest:
     - name: 'microsoft'
       publisher: 'Microsoft'
