@@ -41,6 +41,9 @@
   url: https://github.com/ScoopInstaller/Java
 - name: games
   url: https://github.com/Calinou/scoop-games
+  skip_download:
+    - name: 'triplea'
+      reason: Appears to hang forever
 
 # Unofficial buckets
 # TODO: Add popular ones from https://scoop.sh/#/buckets
