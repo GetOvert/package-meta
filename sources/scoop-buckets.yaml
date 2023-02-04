@@ -2,6 +2,9 @@
 # https://github.com/ScoopInstaller/Scoop/blob/master/buckets.json
 - name: main
   url: https://github.com/ScoopInstaller/Main
+  skip_download:
+    - name: '^vcredist-aio$'
+      reason: Appears to hang forever
   skip_icon_harvest:
     - name: ''
       reason: Main contains only command-line developer tools
