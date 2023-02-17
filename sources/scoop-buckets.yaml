@@ -4,7 +4,7 @@
   url: https://github.com/ScoopInstaller/Main
   skip_download:
     - name: ''
-      reason: 'vcredist-aio' package appears to hang forever and I can't solve it right now
+      reason: vcredist-aio package appears to hang forever and I can't solve it right now
   skip_icon_harvest:
     - name: ''
       reason: Main contains only command-line developer tools
