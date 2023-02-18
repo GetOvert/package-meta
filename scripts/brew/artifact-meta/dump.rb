@@ -8,7 +8,7 @@ require "json"
 require "pathname"
 require "shellwords"
 
-BATCH_SIZE = 1
+BATCH_SIZE = 8
 
 def dump_artifact_meta(tap_config)
   tap = tap_config.tap
