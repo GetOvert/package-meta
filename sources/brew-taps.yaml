@@ -2,6 +2,8 @@
 - name: homebrew/core
 - name: homebrew/cask
   skip_download:
+    - name: '.*'
+      reason: Temporary to work through backlog
     - name: 'anaconda'
       reason: It's huge
     - name: 'cernbox'
