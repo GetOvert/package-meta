@@ -14,6 +14,8 @@
       reason: Seems to get stuck
     - name: '^eusamanager$'
       reason: Seems to get stuck
+    - name: '^cold-turkey-blocker$'
+      reason: Seems to get stuck
   # skip_icon_harvest:
 - name: homebrew/cask-versions
   # skip_icon_harvest:
