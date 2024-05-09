@@ -8,8 +8,6 @@
 - name: extras
   url: https://github.com/ScoopInstaller/Extras
   skip_download:
-    - name: '.*'
-      reason: Temporary to work through backlog
     - name: '^vcredist-aio'
       reason: Appears to hang forever
     - name: '^calibre$'
