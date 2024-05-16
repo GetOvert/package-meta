@@ -37,7 +37,6 @@
 - name: elastic/tap
 - name: ethereum/ethereum
 - name: gcenx/wine
-- name: getovert/tap
 - name: graalvm/tap
   skip_download:
     - name: ''
