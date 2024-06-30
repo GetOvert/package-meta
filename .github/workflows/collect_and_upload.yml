@@ -53,3 +53,12 @@ jobs:
         env:
           GOOGLE_CLOUD_PROJECT: getovert
           GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+
+  # https://github.com/liskin/gh-workflow-keepalive#usage
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: liskin/gh-workflow-keepalive@v1
