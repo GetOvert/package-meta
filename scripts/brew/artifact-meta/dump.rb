@@ -60,7 +60,7 @@ def dump_artifact_meta(tap_config)
       Cask.with_all_installed(casks) do
         casks.each do |cask|
           cask_meta = cask_meta_by_name[cask.info['full_token']]
-          old_copyright = cask_meta['copyright'] || ''
+          old_copyright = cask_meta['copyright-v2'] || ''
 
           publisher_strat = 'crude'
           if cask.copyright != old_copyright
@@ -79,6 +79,7 @@ def dump_artifact_meta(tap_config)
 
           meta_by_name[cask.info['full_token']] = {
             'copyright': cask.copyright,
+            'copyright-v2': cask.copyright,
             'publisher': cask.publisher,
             'publisher_strat': publisher_strat,
             'category': cask.category
