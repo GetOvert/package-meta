@@ -1,4 +1,8 @@
 require_relative "./env.rb"
+
+# Implicitly needed by ruby-openai gem
+require "faraday_middleware"
+
 require "openai"
 
 module OpenAIChat
