@@ -7,3 +7,5 @@ gem 'google-cloud-storage', '~> 1.44'
 gem 'parallel', '~> 1.22'
 gem 'faraday', '~> 1.0.1'
 gem "ruby-openai", "~> 7.1"
+
+gem "faraday_middleware", "~> 1.2"
