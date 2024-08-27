@@ -22,6 +22,7 @@ def dump_artifact_meta(tap_config)
   meta_file_name = "brew/#{tap.name}/artifact-meta.json"
 
   state = CloudStorage.download_json(meta_file_name) || {}
+  cask_meta_by_name = state.dig('by_name', 'cask') || {}
 
   artifact_meta = begin
     last_commit = state['commit']
@@ -58,6 +59,18 @@ def dump_artifact_meta(tap_config)
 
       Cask.with_all_installed(casks) do
         casks.each do |cask|
+          cask_meta = cask_meta_by_name[cask.info['full_token']]
+          old_copyright = cask_meta['copyright'] || ''
+
+          publisher_strat = 'crude'
+          if cask.copyright != old_copyright
+            publishers = OpenAIChat.extract_publishers(cask.copyright)
+            if publishers.all? { |publisher| cask.copyright.include?(publisher) }
+              cask.publisher = publishers.join('; ')
+              publisher_strat = 'gpt-v1'
+            end
+          end
+
           if tap_config.should_harvest_icon?(cask)
             upload_cask_icon(cask)
           else
@@ -67,6 +80,7 @@ def dump_artifact_meta(tap_config)
           meta_by_name[cask.info['full_token']] = {
             'copyright': cask.copyright,
             'publisher': cask.publisher,
+            'publisher_strat': publisher_strat,
             'category': cask.category
           }
         end

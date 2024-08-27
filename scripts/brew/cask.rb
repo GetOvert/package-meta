@@ -74,8 +74,13 @@ class Cask
     @copyright ||= apps.filter_map(&:copyright).join("; ")
   end
 
+  attr_writer :publisher
   def publisher
-    @publisher ||= apps.filter_map(&:publisher).join("; ")
+    @publisher || crudely_parsed_publisher
+  end
+
+  def crudely_parsed_publisher
+    @crudely_parsed_publisher ||= apps.filter_map(&:crudely_parsed_publisher).join("; ")
   end
 
   def category
@@ -147,7 +152,7 @@ class App
     info['NSHumanReadableCopyright'] if info
   end
 
-  def publisher
+  def crudely_parsed_publisher
     return unless publisher = copyright
 
     publisher.gsub!(/\r?\n/, ' ')
