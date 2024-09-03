@@ -61,14 +61,22 @@ def dump_artifact_meta(tap_config)
       Cask.with_all_installed(casks) do
         casks.each do |cask|
           cask_meta = cask_meta_by_name[cask.info['full_token']]
-          old_copyright = cask_meta['copyright-v2'] || ''
+
+          # 'copyright-v2' was a temporary measure to mark usage of new publisher strats,
+          # which doesn't really make sense in retrospect.
+          cask_meta.delete('copyright-v2')
+
+          old_copyright = cask_meta['copyright'] || ''
+          old_publisher_strat = cask_meta['publisher_strat']
 
           publisher_strat = 'crude'
-          if cask.copyright != old_copyright
+          if cask.copyright != old_copyright || old_publisher_strat.nil?
             publishers = OpenAIChat.extract_publishers(cask.copyright)
             if publishers.all? { |publisher| cask.copyright.include?(publisher) }
               cask.publisher = publishers.join('; ')
               publisher_strat = 'gpt-v1'
+            else
+              $stderr.puts "GPT-extracted publishers '#{publishers.join('; ')}' not found in copyright string '#{cask.copyright}'; reverting to crude strat"
             end
           end
 
