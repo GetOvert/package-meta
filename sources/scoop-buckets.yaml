@@ -18,6 +18,8 @@
       reason: Appears to hang forever
     - name: '^openvpn$'
       reason: Appears to hang forever
+    - name: '^sucrose$'
+      reason: Appears to hang forever
   skip_icon_harvest:
     - name: 'microsoft'
       publisher: 'Microsoft'
