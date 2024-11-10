@@ -54,6 +54,8 @@
       reason: Appears to hang forever
     - name: 'battlenet'
       reason: Appears to hang forever
+    - name: '^openfortress$'
+      reason: Appears to hang forever
 
 # Unofficial buckets
 # TODO: Add popular ones from https://scoop.sh/#/buckets
