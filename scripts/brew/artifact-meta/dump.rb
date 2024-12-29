@@ -64,7 +64,7 @@ def dump_artifact_meta(tap_config)
 
           # 'copyright-v2' was a temporary measure to mark usage of new publisher strats,
           # which doesn't really make sense in retrospect.
-          cask_meta.delete('copyright-v2')
+          cask_meta&.delete('copyright-v2')
 
           old_copyright = cask_meta['copyright'] || ''
           old_publisher_strat = cask_meta['publisher_strat']
@@ -88,7 +88,6 @@ def dump_artifact_meta(tap_config)
 
           meta_by_name[cask.info['full_token']] = {
             'copyright': cask.copyright,
-            'copyright-v2': cask.copyright,
             'publisher': cask.publisher,
             'publisher_strat': publisher_strat,
             'category': cask.category
